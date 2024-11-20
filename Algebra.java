@@ -37,7 +37,7 @@ public class Algebra {
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-        // Replace the following statement with your code
+		// Replace the following statement with your code
 		return 0;
 	}
 
@@ -49,19 +49,19 @@ public class Algebra {
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-        // Replace the following statement with your code
+		// Replace the following statement with your code
 		return 0;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-        // Replace the following statement with your code
+		// Replace the following statement with your code
 		return 0;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-        // Replace the following statement with your code
+		// Replace the following statement with your code
 		return 0;
 	}	  	  
 }
