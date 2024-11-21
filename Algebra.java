@@ -66,14 +66,19 @@ public class Algebra {
 				mult = plus(mult,x2); // increment x2 by x2, x1 times
 			}
 		}else if (x1<0 && x2>0){ //case for single negative
-			
+			mult =x1;
 			for (int i = 1 ; i<x2 ; i++){
 				mult = plus(mult,x1); // increment x1 by x1, x2 times
 			}
-		} else { //last case being both are negative, all other options covered beforehand
+		} else if(x1<0 && x2<0) { //case for both negative
 			mult =x1;
 			for (int i = 1 ; i>x2 ; i--){
 				mult = minus(mult,x1); // increment x1 by x1, x2 times
+			}
+		} else {
+			mult =x2;
+			for (int i = 1 ; i<x1 ; i++){
+				mult = plus(mult,x2); // increment x2 by x2, x1 times
 			}
 		}
 		return mult; 
@@ -112,9 +117,15 @@ public class Algebra {
 				count++;
 			} 
 			return times (count,-1);
-		}else {
+		}else  if (x2<0 && x1<0){
 			x1 = times (x1,-1);
 			x2 = times (x2,-1);
+			while (x2<=x1){
+				x1 = minus(x1,x2);
+				count++;
+			} 
+			return count;
+		}else {
 			while (x2<=x1){
 				x1 = minus(x1,x2);
 				count++;
