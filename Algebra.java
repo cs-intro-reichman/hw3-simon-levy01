@@ -11,12 +11,14 @@ public class Algebra {
 	    System.out.println(minus(7,2));  // 7 - 2
    		System.out.println(minus(2,7));  // 2 - 7
  		System.out.println(times(3,4));  // 3 * 4
+		System.out.println(times(-3,-4));  // -3 * -4
    		System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
    		System.out.println(pow(5,3));      // 5^3
    		System.out.println(pow(3,5));      // 3^5
-   		System.out.println(div(12,3));   // 12 / 3    
+   		System.out.println(div(12,3));   // 12 / 3  
+		System.out.println(div(-12,-3));   // -12 / -3   
    		System.out.println(div(5,5));    // 5 / 5  
-   		System.out.println(div(25,7));   // 25 / 7
+   		System.out.println(div(25,7));   // 25 / 7	
    		System.out.println(mod(25,7));   // 25 % 7
    		System.out.println(mod(120,6));  // 120 % 6    
    		System.out.println(sqrt(36));
@@ -55,19 +57,26 @@ public class Algebra {
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		Boolean negative = false;
+		int mult = 0;
 		if (x2==0 || x1==0){ // exception for times 0
-			return 0;
-		} else if (x1<0 ^ x2<0){ //googled java xor, used instead of 2 statements with ||
-			negative = true;
+			return mult;
+		} else if (x2<0 && x1>0){ //case for single negative
+			mult =x2;
+			for (int i = 1 ; i<x1 ; i++){
+				mult = plus(mult,x2); // increment x2 by x2, x1 times
+			}
+		}else if (x1<0 && x2>0){ //case for single negative
+			
+			for (int i = 1 ; i<x2 ; i++){
+				mult = plus(mult,x1); // increment x1 by x1, x2 times
+			}
+		} else { //last case being both are negative, all other options covered beforehand
+			mult =x1;
+			for (int i = 1 ; i>x2 ; i--){
+				mult = minus(mult,x1); // increment x1 by x1, x2 times
+			}
 		}
-		x1 = Math.abs(x1);
-		x2 = Math.abs(x2); // to ignore negatives (instructions said no math.pow or sqrt, i assume abs is allowed)
-		int mult =x1;
-		for (int i = 1 ; i<x2 ; i++){
-			mult = plus(mult,x1); // increment x1 by x1, x2 times
-		}
-		return negative ? -mult : mult; // return negative if x1 xor x2 are negative, otherisw, positive
+		return mult; 
 	}
 
 	// Returns x^n (for n >= 0)
@@ -84,17 +93,34 @@ public class Algebra {
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
+		int count = 0;
 		if (0==x2){ 
 			return -1; 
 		} else if (x1<x2){
 			return 0;
+		} else if (x1<0 && x2>0){
+			x1 = times (x1,-1);
+			while (x2<=x1){
+				x1 = minus(x1,x2);
+				count++;
+			} 
+			return times (count,-1);
+		} else if (x1>0 && x2<0){
+			x2 = times (x2,-1);
+			while (x2<=x1){
+				x1 = minus(x1,x2);
+				count++;
+			} 
+			return times (count,-1);
+		}else {
+			x1 = times (x1,-1);
+			x2 = times (x2,-1);
+			while (x2<=x1){
+				x1 = minus(x1,x2);
+				count++;
+			} 
+			return count;
 		}
-		int count = 0;
-		while (x2<=x1){
-			x1 = minus(x1,x2);
-			count++;
-		}
-		return count;
 	}
 
 	// Returns x1 % x2
@@ -110,7 +136,13 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
+		if (x==0){
+			return 0;
+		} else if (x<0){
+			return -1;
+		} else {
+
+		}
 		return 0;
 	}	  	  
 }
