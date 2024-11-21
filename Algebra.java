@@ -149,13 +149,22 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		if (x==0){
+		int g = 1;
+		if (x==0){     // exception for 0
 			return 0;
-		} else if (x<0){
+		} else if (x<0){ // exception for negatives
 			return -1;
 		} else {
-
+			while (times(g, g)<=x){
+				g = plus(g, 1);
+			}
 		}
-		return 0;
-	}	  	  
+		return minus(g, 1);
+	}
+	
+	//created my own absolute value function for sorting algorithm
+	public static int abs(int x) {
+		x= (x<0) ? times(x, -1) : x;
+		return x;
+	}
 }
