@@ -7,6 +7,7 @@ public class Algebra {
 	public static void main(String args[]) {
 	    // Tests some of the operations
 	    System.out.println(plus(2,3));   // 2 + 3
+		System.out.println(plus(-2,-3));   // -2 + -3
 	    System.out.println(minus(7,2));  // 7 - 2
    		System.out.println(minus(2,7));  // 2 - 7
  		System.out.println(times(3,4));  // 3 * 4
@@ -21,31 +22,52 @@ public class Algebra {
    		System.out.println(sqrt(36));
 		System.out.println(sqrt(263169));
    		System.out.println(sqrt(76123));
+
 	}  
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		for (int i = 0 ; i<x2 ; i++){
+		if (x2>0){
+			for (int i = 0 ; i<x2 ; i++){
 			x1++; // increment x1 by +1, x2 times
+			}
+		} else if (x2<0){
+			for (int i = 0 ; i<-x2 ; i++){
+				x1--; // increment x1 by -1, x2 times	
+			}
 		}
 		return x1;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		for (int i = 0 ; i<x2 ; i++){
-			x1--; // increment x1 by +1, x2 times
+		if (x2>0){
+			for (int i = 0 ; i<x2 ; i++){
+				x1--; // increment x1 by +1, x2 times
+			}
+		} else if (x2<0){
+			for (int i = 0 ; i<-x2 ; i++){
+				x1++; // increment x1 by -1, x2 times 
+			}
 		}
 		return x1;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
+		Boolean negative = false;
+		if (x2==0 || x1==0){ // exception for times 0
+			return 0;
+		} else if (x1<0 ^ x2<0){ //googled java xor, used instead of 2 statements with ||
+			negative = true;
+		}
+		x1 = Math.abs(x1);
+		x2 = Math.abs(x2); // to ignore negatives (instructions said no math.pow or sqrt, i assume abs is allowed)
 		int mult =x1;
 		for (int i = 1 ; i<x2 ; i++){
 			mult = plus(mult,x1); // increment x1 by x1, x2 times
 		}
-		return mult;
+		return negative ? -mult : mult; // return negative if x1 xor x2 are negative, otherisw, positive
 	}
 
 	// Returns x^n (for n >= 0)
