@@ -101,7 +101,9 @@ public class Algebra {
 		int count = 0;
 		if (0==x2){ 
 			return -1; 
-		} else if (x1<x2){
+		} else if ((x2<0 && x1<0)&&x1>x2){
+			return 0;
+		} else if ((x2>0 && x1>0)&&x1<x2){
 			return 0;
 		} else if (x1<0 && x2>0){
 			x1 = times (x1,-1);
