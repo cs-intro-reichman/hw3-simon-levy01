@@ -7,18 +7,21 @@ public class Algebra {
 	public static void main(String args[]) {
 	    // Tests some of the operations
 	    System.out.println(plus(2,3));   // 2 + 3
-		System.out.println(plus(-2,-3));   // -2 + -3
+		System.out.println(plus(-2,-3));       // -2 + -3
 	    System.out.println(minus(7,2));  // 7 - 2
    		System.out.println(minus(2,7));  // 2 - 7
  		System.out.println(times(3,4));  // 3 * 4
-		System.out.println(times(-3,-4));  // -3 * -4
+		System.out.println(times(-3,-4));      // -3 * -4
+		System.out.println(times(-3,4));    // -3 * 4
    		System.out.println(plus(2,times(4,2)));  // 2 + 4 * 2
    		System.out.println(pow(5,3));      // 5^3
    		System.out.println(pow(3,5));      // 3^5
    		System.out.println(div(12,3));   // 12 / 3  
 		System.out.println(div(-12,-3));   // -12 / -3   
    		System.out.println(div(5,5));    // 5 / 5  
-   		System.out.println(div(25,7));   // 25 / 7	
+   		System.out.println(div(25,7));   // 25 / 7
+		System.out.println(div(-25,7));     // -25 / 7
+		System.out.println(div(25,-7));	   // 25 / -7
    		System.out.println(mod(25,7));   // 25 % 7
    		System.out.println(mod(120,6));  // 120 % 6    
    		System.out.println(sqrt(36));
@@ -60,15 +63,12 @@ public class Algebra {
 		int mult = 0;
 		if (x2==0 || x1==0){ // exception for times 0
 			return mult;
-		} else if (x2<0 && x1>0){ //case for single negative
-			mult =x2;
-			for (int i = 1 ; i<x1 ; i++){
-				mult = plus(mult,x2); // increment x2 by x2, x1 times
-			}
-		}else if (x1<0 && x2>0){ //case for single negative
-			mult =x1;
-			for (int i = 1 ; i<x2 ; i++){
-				mult = plus(mult,x1); // increment x1 by x1, x2 times
+		} else if ((x2<0 && x1>0) ^ (x1<0 && x2>0)){ //case for single negative
+			int larger = x1>x2 ? x1:x2;
+			int smaller = x1>x2 ? x2 :x1;
+			mult =smaller;
+			for (int i = 1 ; i<larger ; i++){
+				mult = plus(mult,smaller); // increment smaller by itself, larger times
 			}
 		} else if(x1<0 && x2<0) { //case for both negative
 			mult =x1;
@@ -76,7 +76,7 @@ public class Algebra {
 				mult = minus(mult,x1); // increment x1 by x1, x2 times
 			}
 		} else {
-			mult =x2;
+			mult =x2; // standard case
 			for (int i = 1 ; i<x1 ; i++){
 				mult = plus(mult,x2); // increment x2 by x2, x1 times
 			}
@@ -99,13 +99,11 @@ public class Algebra {
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
 		int count = 0;
-		if (0==x2){ 
+		if (0==x2){ //exception for divisor 0
 			return -1; 
-		} else if ((x2<0 && x1<0)&&x1>x2){
+		} else if (((x2<0 && x1<0) && (x1>x2)) || ((x2>0 && x1>0) && (x1<x2))){ // checks if dividend is less than devisor
 			return 0;
-		} else if ((x2>0 && x1>0)&&x1<x2){
-			return 0;
-		} else if (x1<0 && x2>0){
+		} else if (x1<0 && x2>0){ 
 			x1 = times (x1,-1);
 			while (x2<=x1){
 				x1 = minus(x1,x2);
