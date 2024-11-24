@@ -28,9 +28,26 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
+		
 		String str1lower = preProcess(str1);
 		String str2lower = preProcess(str2);
-		
+		if (str1lower.length() != str2lower.length()){
+			return false;
+		}
+		String marked2 = str2lower;
+		for (int i = 0; i< str1lower.length(); i++){ //iterate over 1st string
+			boolean charMatch = false; //bool for character match
+			for (int j = 0; j < marked2.length(); j++){ // iterate over 2nd string
+				if(str1lower.charAt(i)==marked2.charAt(j)){ //if characters match, it removes it from the 2nd
+					marked2 = marked2.substring(0,j) + '*' + marked2.substring(j+1);
+					charMatch = true;
+					break;
+				}
+			}
+			if (!charMatch){ // return false of not all characters matched
+				return false;
+			}
+		}
 		return true;
 	}
 	   
@@ -43,7 +60,7 @@ public class Anagram {
 		String proccesed = "";
 		for (int i = 0; i<length; i++){
 			char c = lower.charAt(i);
-			if ((c >= 'a' && c <='z') || c == ' '){
+			if ((c >= 'a' && c <='z')){
 				proccesed = proccesed + c;
 			}
 		}
@@ -53,7 +70,14 @@ public class Anagram {
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-
-		return "";
+		int length = str.length();
+		String anagram = "";
+		for (int i=0; i<length; i++){
+			int randomIndex = (int)(Math.random()*str.length());
+			char rnd = str.charAt(randomIndex);
+			anagram = anagram +rnd;
+			str = str.substring(0, randomIndex) + str.substring(randomIndex +1);
+		}
+		return anagram;
 	}
 }

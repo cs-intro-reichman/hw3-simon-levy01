@@ -159,10 +159,4 @@ public class Algebra {
 		}
 		return minus(g, 1);
 	}
-	
-	//created my own absolute value function for sorting algorithm
-	public static int abs(int x) {
-		x= (x<0) ? times(x, -1) : x;
-		return x;
-	}
 }
