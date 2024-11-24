@@ -70,6 +70,7 @@ public class LoanCalc {
 				fl=fg;
 			} else {
 				H=g;
+				fh=fg;
 			}
 			g = (L+H)/2.0; //new guess
 			fg = endBalance (loan, rate, n ,g); //recaclulate fg
