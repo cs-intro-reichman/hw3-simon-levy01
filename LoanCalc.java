@@ -61,7 +61,7 @@ public class LoanCalc {
 		double g = (L+H)/2; //initial guess
 		double balance = endBalance(loan, rate, n, g); 
 		iterationCounter = 0; // reset step counter
-		while (((H-L)/2.0)>=epsilon){ // continue until within accuracy range
+		while ((Math.abs(balance))>=epsilon){ // continue until within accuracy range
 			if (balance >0){ //if balance is positive, payment is too low
 				L=g;
 			} else { //if balance is negative, payment is too high
