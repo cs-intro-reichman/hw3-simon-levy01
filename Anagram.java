@@ -30,8 +30,10 @@ public class Anagram {
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
 		
-		String str1lower = preProcessnospace(str1);
-		String str2lower = preProcessnospace(str2);
+		String str1lower = preProcess(str1);
+		String str2lower = preProcess(str2);
+		str1lower = nospace(str1lower);
+		str2lower = nospace(str2lower);
 		if (str1lower.length() != str2lower.length()){
 			return false;
 		}
@@ -81,8 +83,8 @@ public class Anagram {
 		}
 		return anagram;
 	}
-	
-	public static String preProcessnospace(String str) {
+	// since ' ' counts as a char, i need a function remove the whitespaces, to then compare strings
+	public static String nospace(String str) { 
 		String lower = str.toLowerCase();
 		int length = str.length();
 		String proccesed = "";
