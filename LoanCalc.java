@@ -63,7 +63,7 @@ public class LoanCalc {
 		double fh = endBalance (loan, rate, n ,H);
 		double fl = endBalance (loan, rate, n ,L);
 		iterationCounter = 0; // reset step counter
-		while (fg>=epsilon){ // continue until within accuracy range
+		while ((H - L)>=epsilon){ // continue until within accuracy range
 			iterationCounter++; //increment counter
 			if (fg*fl>0){ 
 				L=g;
