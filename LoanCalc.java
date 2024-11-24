@@ -30,7 +30,7 @@ public class LoanCalc {
 	private static double endBalance(double loan, double rate, int n, double payment) {	
 		double total = loan;
 		for (int i=0 ; i<n ; i++){ // calculate total after amount of payments
-			total = (total-payment)*(1+(rate/100.0)); //iterate on new total 
+			total = (total-payment)*(1 + (rate/100.0)); //iterate on new total 
 		}
 		return total;
 	}
@@ -61,7 +61,7 @@ public class LoanCalc {
 		double g = (L+H)/2; //initial guess
 		double balance = endBalance(loan, rate, n, g); 
 		iterationCounter = 0; // reset step counter
-		while (Math.abs(balance)>epsilon){ // continue until within accuracy range
+		while (((H-L)/2.0)>=epsilon){ // continue until within accuracy range
 			if (balance >0){ //if balance is positive, payment is too low
 				L=g;
 			} else { //if balance is negative, payment is too high
