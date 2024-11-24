@@ -59,17 +59,20 @@ public class LoanCalc {
         double L = 0; //lower bound
 		double H = loan; // upper bound
 		double g = (L+H)/2; //initial guess
-		double balance = endBalance(loan, rate, n, g); 
+		double fg = endBalance (loan, rate, n ,g); //endBalance with payment g
+		double fh = endBalance (loan, rate, n ,H);
+		double fl = endBalance (loan, rate, n ,L);
 		iterationCounter = 0; // reset step counter
-		while ((Math.abs(balance))>=epsilon){ // continue until within accuracy range
-			if (balance >0){ //if balance is positive, payment is too low
+		while (fg>=epsilon){ // continue until within accuracy range
+			iterationCounter++; //increment counter
+			if (fg*fl>0){ 
 				L=g;
-			} else { //if balance is negative, payment is too high
+				fl=fg;
+			} else {
 				H=g;
 			}
-			g = (L+H)/2; //new guess
-			balance = endBalance(loan, rate, n, g); //recaclulate balance
-			iterationCounter++; //increment counter
+			g = (L+H)/2.0; //new guess
+			fg = endBalance (loan, rate, n ,g); //recaclulate fg
 		}
 		return g;
     }
