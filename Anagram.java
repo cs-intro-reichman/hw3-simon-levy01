@@ -60,7 +60,7 @@ public class Anagram {
 		String proccesed = "";
 		for (int i = 0; i<length; i++){
 			char c = lower.charAt(i);
-			if ((c >= 'a' && c <='z')){
+			if ((c >= 'a' && c <='z') || c == ' '){
 				proccesed = proccesed + c;
 			}
 		}
