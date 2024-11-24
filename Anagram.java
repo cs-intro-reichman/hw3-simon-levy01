@@ -6,6 +6,7 @@ public class Anagram {
 		System.out.println(isAnagram("William Shakespeare","I am a weakish speller")); // true
 		System.out.println(isAnagram("Madam Curie","Radium came")); // true
 		System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
+		System.out.println(isAnagram("aabbcc", "bbaacc"));
 
 		// Tests the preProcess function.
 		System.out.println(preProcess("What? No way!!!"));
@@ -29,8 +30,8 @@ public class Anagram {
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
 		
-		String str1lower = preProcess(str1);
-		String str2lower = preProcess(str2);
+		String str1lower = preProcessnospace(str1);
+		String str2lower = preProcessnospace(str2);
 		if (str1lower.length() != str2lower.length()){
 			return false;
 		}
@@ -80,4 +81,17 @@ public class Anagram {
 		}
 		return anagram;
 	}
+	
+	public static String preProcessnospace(String str) {
+		String lower = str.toLowerCase();
+		int length = str.length();
+		String proccesed = "";
+		for (int i = 0; i<length; i++){
+			char c = lower.charAt(i);
+			if ((c >= 'a' && c <='z')){
+				proccesed = proccesed + c;
+			}
+		}
+		return (proccesed);
+	} 
 }
